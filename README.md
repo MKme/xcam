@@ -6,6 +6,10 @@ XCAM is the LAN-ready ESP32 camera node for the XTOC video ISR page. It is built
 
 XTOC is the operator-facing video ISR surface in the ecosystem. XCAM is the edge collection layer underneath it: low-cost cameras on the LAN, fast browser access for local validation, and transport formats that slot directly into surveillance, ISR, and recording workflows without adding translation services in the middle.
 
+![XTOC Video ISR view](assets/xtoc/xtoc-video-isr-view.png)
+
+See the XTOC suite: [XTOC Tactical Operations Center Software Suite](https://store.mkme.org/product/xtoc-tactical-operations-center-software-suite/)
+
 ## Hardware
 
 ![AI-Thinker ESP32-CAM board](assets/boards/ai-thinker-esp32-cam.jpg)
