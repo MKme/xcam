@@ -6,6 +6,15 @@ XCAM is the LAN-ready ESP32 camera node for the XTOC video ISR page. It is built
 
 XTOC is the operator-facing video ISR surface in the ecosystem. XCAM is the edge collection layer underneath it: low-cost cameras on the LAN, fast browser access for local validation, and transport formats that slot directly into surveillance, ISR, and recording workflows without adding translation services in the middle.
 
+## Hardware
+
+![AI-Thinker ESP32-CAM board](assets/boards/ai-thinker-esp32-cam.jpg)
+
+For a fast XCAM bring-up, start with the standard ESP32-CAM board:
+
+- Buy the board: [ESP32-CAM board on Amazon](https://amzn.to/4sGDcpn)
+- Optional case: [ESP32-CAM case on Thingiverse](https://www.thingiverse.com/thing:6325976)
+
 Out of the box, each flashed node boots with a unique default identity such as `xcam-a1b2c3`. That matters when several units share the same LAN:
 
 - each camera exposes a different setup SSID during provisioning
