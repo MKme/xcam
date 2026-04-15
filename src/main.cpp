@@ -55,7 +55,56 @@ std::unique_ptr<rtsp_server> camera_server;
 // Web server
 WebServer web_server(80);
 
-auto thingName = String(WIFI_SSID) + "-" + String(ESP.getEfuseMac(), 16);
+String build_default_thing_name()
+{
+  char thing_name[32];
+  snprintf(
+      thing_name,
+      sizeof(thing_name),
+      "%s-%06lx",
+      WIFI_SSID,
+      static_cast<unsigned long>(ESP.getEfuseMac() & 0xFFFFFF));
+  return String(thing_name);
+}
+
+String get_device_hostname(const char *thing_name)
+{
+  const auto hostname = WiFi.getHostname();
+  if (hostname != nullptr && hostname[0] != '\0')
+    return String(hostname);
+
+  auto fallback = String(thing_name);
+  fallback.toLowerCase();
+  fallback.replace(" ", "-");
+  return fallback;
+}
+
+String build_mdns_name(const String &hostname)
+{
+  return hostname + ".local";
+}
+
+String build_http_url(const String &hostname, const char *path)
+{
+  return "http://" + build_mdns_name(hostname) + path;
+}
+
+String build_rtsp_url(const String &hostname)
+{
+  return "rtsp://" + build_mdns_name(hostname) + ":" + String(RTSP_PORT) + "/mjpeg/1";
+}
+
+String build_http_url(const IPAddress &ipv4, const char *path)
+{
+  return "http://" + ipv4.toString() + path;
+}
+
+String build_rtsp_url(const IPAddress &ipv4)
+{
+  return "rtsp://" + ipv4.toString() + ":" + String(RTSP_PORT) + "/mjpeg/1";
+}
+
+auto thingName = build_default_thing_name();
 IotWebConf iotWebConf(thingName.c_str(), &dnsServer, &web_server, WIFI_PASSWORD, CONFIG_VERSION);
 
 // Camera initialization result
@@ -68,15 +117,13 @@ void handle_root()
   if (iotWebConf.handleCaptivePortal())
     return;
 
-  // Format hostname
-  auto hostname = "esp32-" + WiFi.macAddress() + ".local";
-  hostname.replace(":", "");
-  hostname.toLowerCase();
-
   // Wifi Modes
   const char *wifi_modes[] = {"NULL", "STA", "AP", "STA+AP"};
   auto ipv4 = WiFi.getMode() == WIFI_MODE_AP ? WiFi.softAPIP() : WiFi.localIP();
   auto ipv6 = WiFi.getMode() == WIFI_MODE_AP ? WiFi.softAPIPv6() : WiFi.localIPv6();
+  auto hostname = get_device_hostname(iotWebConf.getThingName());
+  auto mdns_name = build_mdns_name(hostname);
+  auto access_point = WiFi.getMode() == WIFI_MODE_AP ? WiFi.softAPSSID() : WiFi.SSID();
 
   auto initResult = esp_err_to_name(camera_init_result);
   if (initResult == nullptr)
@@ -103,14 +150,25 @@ void handle_root()
       {"NumRTSPSessions", camera_server != nullptr ? String(camera_server->num_connected()) : "RTSP server disabled"},
       // Network
       {"HostName", hostname},
+      {"MdnsName", mdns_name},
       {"MacAddress", WiFi.macAddress()},
-      {"AccessPoint", WiFi.SSID()},
+      {"AccessPoint", access_point},
       {"SignalStrength", String(WiFi.RSSI())},
       {"WifiMode", wifi_modes[WiFi.getMode()]},
       {"IPv4", ipv4.toString()},
       {"IPv6", ipv6.toString()},
       {"NetworkState.ApMode", String(iotWebConf.getState() == iotwebconf::NetworkState::ApMode)},
       {"NetworkState.OnLine", String(iotWebConf.getState() == iotwebconf::NetworkState::OnLine)},
+      {"HttpUrlMdns", build_http_url(hostname, "/")},
+      {"HttpUrlIpv4", build_http_url(ipv4, "/")},
+      {"RtspUrlMdns", build_rtsp_url(hostname)},
+      {"RtspUrlIpv4", build_rtsp_url(ipv4)},
+      {"StreamUrlMdns", build_http_url(hostname, "/stream")},
+      {"StreamUrlIpv4", build_http_url(ipv4, "/stream")},
+      {"SnapshotUrlMdns", build_http_url(hostname, "/snapshot")},
+      {"SnapshotUrlIpv4", build_http_url(ipv4, "/snapshot")},
+      {"RestartUrlMdns", build_http_url(hostname, "/restart")},
+      {"RestartUrlIpv4", build_http_url(ipv4, "/restart")},
       // Camera
       {"FrameSize", String(param_frame_size.value())},
       {"FrameDuration", String(param_frame_duration.value())},

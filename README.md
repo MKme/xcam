@@ -1,31 +1,48 @@
-# ESP32CAM-RTSP
+# XCAM
 
 [![Platform IO CI](https://github.com/rzeldent/esp32cam-rtsp/actions/workflows/main.yml/badge.svg)](https://github.com/rzeldent/esp32cam-rtsp/actions/workflows/main.yml)
 
-Simple [RTSP](https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol), [HTTP JPEG Streamer](https://en.wikipedia.org/wiki/Motion_JPEG) and image server with configuration through the web interface.
+XCAM is the LAN-ready ESP32 camera node for the XTOC video ISR page. It is built to make multi-camera field deployments straightforward: flash a camera, give it a site-friendly name, join it to the same network as the rest of the stack, and hand stable RTSP, MJPEG, or snapshot URLs to XTOC.
 
-> [!IMPORTANT]  
-> New branch available! Here [branch: develop](https://github.com/rzeldent/esp32cam-rtsp/tree/develop)
-> This branch supports all the current devices and the Seeed Studio Xiao esp32s3!
-> Please use this and let me know if this works for you!
+XTOC is the operator-facing video ISR surface in the ecosystem. XCAM is the edge collection layer underneath it: low-cost cameras on the LAN, fast browser access for local validation, and transport formats that slot directly into surveillance, ISR, and recording workflows without adding translation services in the middle.
 
-Flashing this software on a ESP32CAM module will make it a **RTSP streaming camera** server, a **HTTP Motion JPEG streamer** and a **HTTP image server**.
+Out of the box, each flashed node boots with a unique default identity such as `xcam-a1b2c3`. That matters when several units share the same LAN:
 
-Supported protocols
+- each camera exposes a different setup SSID during provisioning
+- each camera advertises a different `.local` hostname after joining WiFi
+- each camera can be renamed to an operator-friendly location such as `xcam-east-gate` or `xcam-motorpool-2`
+- each camera presents stable URLs that can be copied directly into the XTOC video ISR page
+
+Flashing this software on an ESP32-CAM module turns it into a compact **RTSP streaming camera**, **HTTP Motion JPEG streamer**, and **HTTP snapshot server** with a browser-based configuration interface.
+
+## XTOC multi-camera workflow
+
+1. Flash one camera at a time.
+2. Join the camera's temporary WiFi network, which defaults to `xcam-<suffix>`.
+3. Open the config page and set WiFi credentials, board type, and the camera's permanent thing name.
+4. Use a location-based naming pattern that XTOC operators can understand immediately, such as `xcam-front-gate`, `xcam-yard-north`, or `xcam-drone-bench`.
+5. After reboot, add the camera to XTOC using one of the URLs shown on the status page:
+   - `rtsp://<thing-name>.local:554/mjpeg/1`
+   - `http://<thing-name>.local/stream`
+   - `http://<thing-name>.local/snapshot`
+
+If `.local` name resolution is not available on the target network, the status page also exposes IPv4 fallback URLs that can be used with DHCP reservations or static addressing.
+
+## Supported protocols
 
 - RTSP
-  The RTSP protocol is an industry standard and allows many CCTV systems and applications (like for example [VLC](https://www.videolan.org/vlc/)) to connect directly to the ESP32CAM camera stream.
+  The RTSP protocol is an industry standard and allows CCTV systems and applications such as [VLC](https://www.videolan.org/vlc/) to connect directly to the XCAM stream.
   It is also possible to stream directly to a server using [ffmpeg](https://ffmpeg.org).
-  This makes the module a camera server allowing recording and the stream can be stored on a disk and replayed later.
-  The URL is rtsp://&lt;ip address&gt;:554/mjpeg/1
+  This makes the module a camera server that can be recorded and replayed later.
+  The URL is `rtsp://&lt;thing-name&gt;.local:554/mjpeg/1`
 
 - HTTP Motion JPEG
-  The HTTP JPEG streamer makes it possible to watch the camera stream directly in your browser.
-  The URL is http://&lt;ip address&gt;/stream
+  The HTTP MJPEG streamer makes it possible to watch the camera stream directly in your browser.
+  The URL is `http://&lt;thing-name&gt;.local/stream`
 
 - HTTP image
   The HTTP Image returns an HTTP JPEG image of the camera.
-  The URL is http://&lt;ip address&gt;/snapshot
+  The URL is `http://&lt;thing-name&gt;.local/snapshot`
 
 This software supports the following ESP32-CAM (and alike) modules:
 
@@ -49,9 +66,10 @@ This software supports the following ESP32-CAM (and alike) modules:
 - TTGO T-CAMERA
 - TTGO T-JOURNAL
 
-The software provides a **configuration web server**, that can be used to:
+The software provides a **configuration web server** that can be used to:
 
-- Provide information about the state of the device, wifi connection and camera,
+- Provide information about the state of the device, WiFi connection and camera,
+- Set the thing name used for the camera identity, local hostname, and XTOC-facing URLs,
 - Set the WiFi parameters,
 - Set the timeout for connecting to the access point,
 - Set an access password,
@@ -84,8 +102,8 @@ The software provides a **configuration web server**, that can be used to:
   - Downside enable
   - Color bar
 
-The software provides contains also a mDNS server to be easily discoverable on the local network.
-It advertises HTTP (port 80) and RTSP (port 554)
+The software also includes mDNS so each camera is easy to discover on the local network.
+It advertises HTTP on port 80 and RTSP on port 554.
 
 ## Required
 
@@ -143,13 +161,13 @@ After programming remove the wire to tge GPIO0 pin to exit the download mode.
 Open a command line or terminal window and clone this repository from GitHub.
 
 ```sh
-git clone https://github.com/rzeldent/esp32cam-rtsp.git
+git clone https://github.com/MKme/xcam.git
 ```
 
-go into the folder
+Go into the folder.
 
 ```sh
-cd esp32cam-rtsp
+cd xcam
 ```
 
 Next, the firmware has to be build and deployed to the ESP32.
@@ -204,25 +222,26 @@ Open the project in a new window. Run the following tasks using the ```Terminal 
 
 To monitor the behavior run the task, run: ```PlatformIO: Monitor (esp32cam)```
 
-## Setting up the ESP32CAM-RTSP
+## Setting up XCAM
 
-After the programming of the ESP32, there is no configuration present. This needs to be added.
-To connect initially to the device open the WiFi connections and select the WiFi network / access point called **ESP32CAM-RTSP**.
+After programming the ESP32, there is no configuration present. This needs to be added.
+To connect initially to the device, open the WiFi connections and select the WiFi network / access point shown as **xcam-&lt;suffix&gt;**.
 Initially there is no password present.
 
 After connecting, the browser should automatically open the status page.
-In case this does not happens automatically, connect to [http://192.168.4.1](http://192.168.4.1).
+If this does not happen automatically, connect to [http://192.168.4.1](http://192.168.4.1).
 This page will display the current settings and status. On the bottom, there is a link to the config. Click on this link.
 
-This link brings up the configuration screen when connecting fot the first time.
+This link brings up the configuration screen when connecting for the first time.
 
 ![Configuration screen](assets/Configuration.png)
 
 Configure at least:
 
-- The access point to connect to. No dropdown is present to show available networks!
-- A password for accessing the Access point (AP) when starting. (required)
-- Type of the ESP32-CAM board
+- The thing name. This should be unique per camera and ideally match the physical position that XTOC operators will use.
+- The access point to connect to. No dropdown is present to show available networks.
+- A password for accessing the Access Point (AP) when starting. This is required.
+- The ESP32-CAM board type.
 
 When finished press ```Apply``` to save the configuration. The screen will redirect to the status screen.
 Here it is possible to reboot the device so the settings take effect.
@@ -230,29 +249,31 @@ It is also possible to restart manually by pressing the reset button.
 
 ## Connecting to the configuration
 
-After the initial configuration and the device is connected to an access point, the device can be configured over http.
+After the initial configuration and the device is connected to an access point, the device can be configured over HTTP.
 
-When a connection is made to [http://esp32cam-rtsp](http://esp32cam-rtsp) the status screen is shown.
+When a connection is made to `http://<thing-name>.local` the status screen is shown.
 
 ![Status screen](assets/index.png)
 
 In case changes have been made to the configuration, this is shown and the possibility to restart is given.
 
 Clicking on the ```change configuration``` button will open the configuration. It is possible that a password dialog is shown before entering.
-If this happens, for the user enter 'admin' and for the password the value that has been configured as the Access Point password.
+If this happens, enter `admin` as the user and use the configured Access Point password.
 
 ## Connecting to the RTSP stream
 
-RTSP stream is available at: [rtsp://esp32cam-rtsp.local:554/mjpeg/1](rtsp://esp32cam-rtsp.local:554/mjpeg/1).
+RTSP stream is available at `rtsp://<thing-name>.local:554/mjpeg/1`.
 This link can be opened with for example [VLC](https://www.videolan.org/vlc/).
 
 ## Connecting to the JPEG motion server
 
-The JPEG motion server server is available using a normal web browser at: [http://esp32cam-rtsp.local:/stream](http://esp32cam-rtsp.local/stream).
+The JPEG motion server is available using a normal web browser at `http://<thing-name>.local/stream`.
 
 ## Connecting to the image server
 
-The image server server is available using a normal web browser at: [http://esp32cam-rtsp.local:/snapshot](http://esp32cam-rtsp.local/snapshot).
+The image server is available using a normal web browser at `http://<thing-name>.local/snapshot`.
+
+The XCAM status page also shows IPv4 fallback URLs for environments where `.local` name resolution is unavailable.
 
 :bangbang: **Please be aware that there is no password present!**.
 Everybody with network access to the device can see the streams or images! Beware of :trollface:!
@@ -356,7 +377,7 @@ Make sure it is connected the right way around (Camera pointing away from the bo
 
 ## Credits
 
-esp32cam-rtsp depends on PlatformIO, Bootstrap 5 and Micro-RTSP by Kevin Hester.
+XCAM is based on `esp32cam-rtsp` and depends on PlatformIO, Bootstrap 5, and Micro-RTSP by Kevin Hester.
 
 ## Change history
 

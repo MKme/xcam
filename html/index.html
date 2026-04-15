@@ -141,6 +141,8 @@
     <div class="flex-table">
         <div class="row">Host name:</div>
         <div>{{HostName}}</div>
+        <div class="row">mDNS name:</div>
+        <div>{{MdnsName}}</div>
         <div class="row">Mac address:</div>
         <div>{{MacAddress}}</div>
         <div class="row">Wifi mode:</div>
@@ -153,6 +155,8 @@
         <div>{{IPv4}}</div>
         <div class="row">IPv6 address:</div>
         <div>{{IPv6}}</div>
+        <div class="row">Control URL:</div>
+        <div><a href="{{HttpUrlMdns}}" target="_blank" rel="noopener">{{HttpUrlMdns}}</a></div>
     </div>
 
     {{#NetworkState.ApMode}}
@@ -240,13 +244,21 @@
     <h2 class="text-center">Special URLs / API</h2>
     <div class="flex-table">
         <div class="row">RTSP camera stream:</div>
-        <div><a href="rtsp://{{IPv4}}:{{RtspPort}}/mjpeg/1">rtsp://{{IPv4}}:{{RtspPort}}/mjpeg/1</a></div>
+        <div><a href="{{RtspUrlMdns}}">{{RtspUrlMdns}}</a></div>
+        <div class="row">RTSP IPv4 fallback:</div>
+        <div><a href="{{RtspUrlIpv4}}">{{RtspUrlIpv4}}</a></div>
         <div class="row">JPEG Motion stream:</div>
-        <div><a href="http://{{IPv4}}/stream" target="_blank" rel="noopener">http://{{IPv4}}/stream</a></div>
+        <div><a href="{{StreamUrlMdns}}" target="_blank" rel="noopener">{{StreamUrlMdns}}</a></div>
+        <div class="row">JPEG IPv4 fallback:</div>
+        <div><a href="{{StreamUrlIpv4}}" target="_blank" rel="noopener">{{StreamUrlIpv4}}</a></div>
         <div class="row">Snapshot of the camera:</div>
-        <div><a href="http://{{IPv4}}/snapshot " target="_blank" rel="noopener">http://{{IPv4}}/snapshot</a> </div>
+        <div><a href="{{SnapshotUrlMdns}}" target="_blank" rel="noopener">{{SnapshotUrlMdns}}</a></div>
+        <div class="row">Snapshot IPv4 fallback:</div>
+        <div><a href="{{SnapshotUrlIpv4}}" target="_blank" rel="noopener">{{SnapshotUrlIpv4}}</a></div>
         <div class="row">Restart the board:</div>
-        <div><a href="http://{{IPv4}}/restart " target="_blank" rel="noopener">http://{{IPv4}}/restart</a> </div>
+        <div><a href="{{RestartUrlMdns}}" target="_blank" rel="noopener">{{RestartUrlMdns}}</a></div>
+        <div class="row">Restart IPv4 fallback:</div>
+        <div><a href="{{RestartUrlIpv4}}" target="_blank" rel="noopener">{{RestartUrlIpv4}}</a></div>
     </div>
 
 </body>

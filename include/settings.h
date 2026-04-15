@@ -1,13 +1,13 @@
 #pragma once
 
-#define APP_TITLE "ESP32CAM-RTSP"
-#define APP_VERSION "1.0"
+#define APP_TITLE "XCAM"
+#define APP_VERSION "1.1"
 
-#define WIFI_SSID "ESP32CAM-RTSP"
+#define WIFI_SSID "xcam"
 #define WIFI_PASSWORD nullptr
 #define CONFIG_VERSION "1.6"
 
-#define OTA_PASSWORD "ESP32CAM-RTSP"
+#define OTA_PASSWORD "XCAM"
 
 #define RTSP_PORT 554
 
