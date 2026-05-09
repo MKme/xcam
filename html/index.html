@@ -241,6 +241,55 @@
     {{/CameraInitialized}}
 
 
+    <h2 class="text-center">Motion Alerts</h2>
+    <div class="flex-table">
+        <div class="row">State:</div>
+        <div>{{#MotionEnabled}}Enabled{{/MotionEnabled}}{{^MotionEnabled}}Disabled{{/MotionEnabled}}</div>
+        <div class="row">XTOC bridge:</div>
+        <div>{{MotionBridgeUrl}}</div>
+        <div class="row">Sentinel label:</div>
+        <div>{{MotionLabel}}</div>
+        <div class="row">Node ID:</div>
+        <div>{{MotionConfiguredNodeId}} (effective {{MotionNodeId}})</div>
+        <div class="row">Location:</div>
+        <div>{{MotionLatitude}}, {{MotionLongitude}}</div>
+        <div class="row">Sensor type:</div>
+        <div>{{MotionSensorType}}</div>
+        <div class="row">Sample interval:</div>
+        <div>{{MotionSampleInterval}} ms</div>
+        <div class="row">Pixel delta:</div>
+        <div>{{MotionPixelDelta}}</div>
+        <div class="row">Area threshold:</div>
+        <div>{{MotionAreaThreshold}}%</div>
+        <div class="row">Consecutive hits:</div>
+        <div>{{MotionConsecutiveHits}} / {{MotionConsecutiveHitsTarget}}</div>
+        <div class="row">Cooldown:</div>
+        <div>{{MotionCooldown}} ms</div>
+        <div class="row">Bridge timeout:</div>
+        <div>{{MotionHttpTimeout}} ms</div>
+        <div class="row">Samples:</div>
+        <div>{{MotionSampleCount}}</div>
+        <div class="row">Alerts:</div>
+        <div>{{MotionAlertCount}}</div>
+        <div class="row">Last motion score:</div>
+        <div>{{MotionLastScore}}%</div>
+        <div class="row">Last sample:</div>
+        <div>{{MotionLastSample}}</div>
+        <div class="row">Last alert:</div>
+        <div>{{MotionLastAlert}}</div>
+        <div class="row">Last send:</div>
+        <div>{{MotionLastSend}}</div>
+        <div class="row">Status:</div>
+        <div>{{MotionLastError}}</div>
+    </div>
+
+    {{#MotionNeedsBridge}}
+    <div class="alert alert-warning">
+        <h3 class="text-center">Motion alerts are enabled, but the XTOC MANET bridge URL is not usable.</h3>
+    </div>
+    {{/MotionNeedsBridge}}
+
+
     <h2 class="text-center">Special URLs / API</h2>
     <div class="flex-table">
         <div class="row">RTSP camera stream:</div>

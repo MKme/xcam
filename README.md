@@ -114,9 +114,15 @@ The software provides a **configuration web server** that can be used to:
   - Vertical flip
   - Downside enable
   - Color bar
+- Configure camera-frame motion alerts for XTOC Sentinel ingestion:
+  - XTOC MANET bridge URL
+  - Sentinel label, node ID, and location
+  - Motion sample interval, pixel delta, area threshold, consecutive-hit count, cooldown, and bridge timeout
 
 The software also includes mDNS so each camera is easy to discover on the local network.
 It advertises HTTP on port 80 and RTSP on port 554.
+
+Motion alerts use the camera image itself. When enabled, XCAM compares a low-resolution digest of sampled frames and posts an XTOC `T=11 SENTINEL` alert packet to the configured MANET bridge URL, usually `http://<xtoc-laptop-lan-ip>:8095/send`.
 
 ## Required
 
