@@ -1,0 +1,203 @@
+<style>
+  .xcam-page{--ink:#111c20;--muted:#53686d;--panel:#f4f8f7;--line:#c8d8d9;--dark:#0f1719;--teal:#32a7a0;--green:#67b86f;--blue:#4f86c6;--amber:#d49b2f;--red:#c75252;font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.5}
+  .xcam-page *{box-sizing:border-box}
+  .xcam-page a{color:#0d6d75;font-weight:700;text-decoration:none}
+  .xcam-page a:hover{text-decoration:underline}
+  .xcam-wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  .xcam-hero{position:relative;min-height:640px;overflow:hidden;background:#111;border-radius:18px;margin:0 0 30px}
+  .xcam-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .xcam-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,13,15,.94) 0%,rgba(8,13,15,.78) 42%,rgba(8,13,15,.36) 76%,rgba(8,13,15,.18) 100%)}
+  .xcam-hero-content{position:relative;z-index:1;max-width:710px;padding:76px 52px;color:#fff}
+  .xcam-kicker{display:inline-flex;gap:8px;align-items:center;margin:0 0 18px;padding:8px 12px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(255,255,255,.08);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .xcam-hero h1{margin:0 0 18px;font-size:56px;line-height:1.02;letter-spacing:0;color:#fff}
+  .xcam-hero p{margin:0 0 24px;font-size:21px;color:#e7f3f2}
+  .xcam-actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 22px}
+  .xcam-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 18px;border-radius:8px;border:1px solid #d7e8e2;background:#eaf6ef;color:#102024!important;font-weight:800}
+  .xcam-button.dark{background:#132328;color:#fff!important;border-color:#2e5056}
+  .xcam-button.warn{background:#ffe8bb;border-color:#efc36e}
+  .xcam-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;max-width:650px}
+  .xcam-proof div{padding:12px 14px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(0,0,0,.28);color:#eef8f5}
+  .xcam-proof strong{display:block;font-size:22px;color:#fff}
+  .xcam-section{padding:34px 0;border-top:1px solid var(--line)}
+  .xcam-section:first-of-type{border-top:0}
+  .xcam-section h2{margin:0 0 14px;font-size:34px;line-height:1.15;color:#14262a}
+  .xcam-section h3{margin:0 0 9px;font-size:22px;color:#182d31}
+  .xcam-lead{max-width:880px;margin:0 0 18px;font-size:20px;color:#30484c}
+  .xcam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .xcam-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .xcam-card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:20px}
+  .xcam-card p{margin:0;color:#41575b}
+  .xcam-card ul{margin:8px 0 0;padding-left:20px;color:#41575b}
+  .xcam-feature{display:flex;gap:12px;align-items:flex-start}
+  .xcam-dot{flex:0 0 16px;width:16px;height:16px;margin-top:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(50,167,160,.18)}
+  .xcam-dot.green{background:var(--green);box-shadow:0 0 0 4px rgba(103,184,111,.18)}
+  .xcam-dot.blue{background:var(--blue);box-shadow:0 0 0 4px rgba(79,134,198,.18)}
+  .xcam-dot.amber{background:var(--amber);box-shadow:0 0 0 4px rgba(212,155,47,.18)}
+  .xcam-image{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block;background:#0f1719}
+  .xcam-split{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
+  .xcam-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+  .xcam-mini{padding:16px;border-left:4px solid #32a7a0;background:#f7faf8;border-radius:6px}
+  .xcam-mini strong{display:block;margin-bottom:4px;color:#14262a}
+  .xcam-callout{padding:20px 22px;border:1px solid #b9d7dc;background:#eef8fa;border-radius:8px}
+  .xcam-faq details{border:1px solid var(--line);border-radius:8px;background:#fff;margin:10px 0;padding:14px 16px}
+  .xcam-faq summary{cursor:pointer;font-weight:800;color:#182d31}
+  .xcam-faq p{margin:10px 0 0;color:#445b5f}
+  .xcam-note{font-size:14px;color:#637579}
+  @media (max-width:900px){.xcam-hero{min-height:auto}.xcam-hero-content{padding:44px 24px}.xcam-hero h1{font-size:38px}.xcam-hero p{font-size:18px}.xcam-proof,.xcam-grid,.xcam-grid.two,.xcam-split,.xcam-strip{grid-template-columns:1fr}}
+</style>
+
+<div class="xcam-page">
+  <section class="xcam-hero">
+    <img class="xcam-hero-img" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-hero.jpg" alt="XCAM ESP32 camera node hardware" width="1200" height="900" />
+    <div class="xcam-hero-content">
+      <div class="xcam-kicker">X Suite LAN video node</div>
+      <h1>XCAM turns small ESP32 cameras into field-ready ISR nodes.</h1>
+      <p>XCAM is the local-first camera edge for XTOC Video ISR: stable RTSP, MJPEG, and snapshot URLs, browser setup, site-friendly naming, and optional camera-frame motion alerts that can report into the XTOC Sentinel workflow.</p>
+      <div class="xcam-actions">
+        <a class="xcam-button dark" href="https://github.com/MKme/xcam" target="_blank" rel="noreferrer">View XCAM on GitHub</a>
+        <a class="xcam-button warn" href="#capabilities">Device capabilities</a>
+        <a class="xcam-button" href="#workflow">See the workflow</a>
+      </div>
+      <div class="xcam-proof">
+        <div><strong>RTSP</strong>camera feed for ISR boards</div>
+        <div><strong>MJPEG</strong>browser stream and snapshot</div>
+        <div><strong>Sentinel</strong>motion alert packets</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="xcam-wrap">
+    <section class="xcam-section">
+      <h2>Why XCAM exists</h2>
+      <p class="xcam-lead">A camera is only useful to a TOC when operators can find it, name it, view it, and trust its URL under pressure. XCAM gives small ESP32 camera boards a repeatable identity and a simple local video path for gates, yards, approaches, equipment rooms, drone benches, and temporary watch points.</p>
+      <div class="xcam-grid">
+        <div class="xcam-card xcam-feature">
+          <span class="xcam-dot"></span>
+          <div><h3>Purpose-built for local operations</h3><p>Each node lives on your LAN and exposes practical camera URLs without a cloud account, vendor portal, or subscription relay in the middle.</p></div>
+        </div>
+        <div class="xcam-card xcam-feature">
+          <span class="xcam-dot green"></span>
+          <div><h3>Fast multi-camera naming</h3><p>Default identities are unique, then operators rename each unit to a location such as <code>xcam-front-gate</code>, <code>xcam-yard-north</code>, or <code>xcam-motorpool-2</code>.</p></div>
+        </div>
+        <div class="xcam-card xcam-feature">
+          <span class="xcam-dot blue"></span>
+          <div><h3>Ready for the XTOC video board</h3><p>XCAM feeds can be added to XTOC Video ISR using RTSP, browser-viewable MJPEG, or a still snapshot URL for quick visual verification.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="xcam-section">
+      <div class="xcam-split">
+        <div>
+          <h2>From camera node to TOC view.</h2>
+          <p class="xcam-lead">Flash the firmware, join the temporary setup WiFi, enter the permanent network settings, give the camera a location name, then copy the status-page URLs into the XTOC Video ISR workflow.</p>
+          <div class="xcam-actions">
+            <a class="xcam-button dark" href="#setup">Setup path</a>
+            <a class="xcam-button" href="#x-suite">X Suite fit</a>
+          </div>
+        </div>
+        <img class="xcam-image" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-video-isr-view.png" alt="XTOC Video ISR board with camera feed layout" width="1888" height="909" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section id="capabilities" class="xcam-section">
+      <h2>What XCAM gives you</h2>
+      <div class="xcam-grid two">
+        <div class="xcam-card">
+          <h3>Three useful camera surfaces</h3>
+          <ul>
+            <li><code>rtsp://&lt;thing-name&gt;.local:554/mjpeg/1</code> for RTSP viewers and TOC boards.</li>
+            <li><code>http://&lt;thing-name&gt;.local/stream</code> for browser-friendly Motion JPEG.</li>
+            <li><code>http://&lt;thing-name&gt;.local/snapshot</code> for a still JPEG check.</li>
+            <li>IPv4 fallback URLs appear on the status page when <code>.local</code> resolution is not available.</li>
+          </ul>
+        </div>
+        <div class="xcam-card">
+          <h3>Browser configuration</h3>
+          <ul>
+            <li>Set WiFi, access password, thing name, board type, and connection timeout.</li>
+            <li>Tune frame size, frame duration, JPEG quality, PSRAM use, and frame buffers.</li>
+            <li>Adjust camera controls such as brightness, contrast, saturation, gain, exposure, white balance, mirror, flip, and lens correction.</li>
+          </ul>
+        </div>
+        <div class="xcam-card">
+          <h3>Motion alerts for XTOC Sentinel</h3>
+          <ul>
+            <li>Samples camera frames and compares a compact visual digest.</li>
+            <li>Uses configurable pixel delta, area threshold, consecutive hits, cooldown, and HTTP timeout.</li>
+            <li>Posts an XTOC <code>T=11 SENTINEL</code> alert packet to the configured MANET bridge URL.</li>
+          </ul>
+        </div>
+        <div class="xcam-card">
+          <h3>Small nodes, broad placement</h3>
+          <ul>
+            <li>Works with ESP32-CAM class boards including AI-Thinker, ESP-EYE, ESP32-S3 camera boards, M5Stack camera variants, UnitCam, UnitCamS3, XIAO ESP32S3 Sense, TTGO camera boards, and similar targets.</li>
+            <li>Fits low-cost fixed observation points where a full laptop, phone, or NVR is the wrong tool.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="setup" class="xcam-section">
+      <h2>Designed for repeatable deployment</h2>
+      <p class="xcam-lead">The setup path is intentionally boring: identify the unit, put it on the right network, give it a name the TOC understands, and record the stream URLs. That matters when you are deploying several cameras quickly.</p>
+      <div class="xcam-strip">
+        <div class="xcam-mini"><strong>1. Provision</strong>Connect to the temporary <code>xcam-&lt;suffix&gt;</code> access point.</div>
+        <div class="xcam-mini"><strong>2. Name</strong>Use a physical location name that matches the operator's map and notes.</div>
+        <div class="xcam-mini"><strong>3. Verify</strong>Open the local stream or snapshot in a browser before moving on.</div>
+        <div class="xcam-mini"><strong>4. Add to XTOC</strong>Paste the RTSP, MJPEG, or snapshot URL into the Video ISR board.</div>
+      </div>
+      <img class="xcam-image" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-configuration.png" alt="XCAM browser configuration page" width="1365" height="768" loading="lazy" decoding="async" style="margin-top:18px" />
+    </section>
+
+    <section id="x-suite" class="xcam-section">
+      <h2>How it fits the X Suite</h2>
+      <p class="xcam-lead">XCAM is not the command center. It is the camera edge underneath the command center, giving XTOC a simple way to discover, stage, and view local video sources without forcing every feed through a cloud service.</p>
+      <div class="xcam-grid">
+        <div class="xcam-card">
+          <h3>XTOC</h3>
+          <p>Use Video ISR to collect and view camera feeds, stage drone or RTMP inputs, capture screencaps, and keep metadata beside the operational picture.</p>
+        </div>
+        <div class="xcam-card">
+          <h3>XCAM</h3>
+          <p>Place small LAN camera nodes at the points that need eyes: entry routes, gates, storage, staging areas, road approaches, equipment tables, and temporary observation posts.</p>
+        </div>
+        <div class="xcam-card">
+          <h3>Sentinel alerts</h3>
+          <p>When motion alerts are enabled, the camera can turn visual change into a structured Sentinel packet that XTOC can ingest over the configured local bridge.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="xcam-section">
+      <div class="xcam-callout">
+        <h2>Operational note</h2>
+        <p>XCAM is intended for trusted local networks, field LANs, MANET segments, lab benches, and temporary operational setups. Anyone who can reach the camera URL on the network may be able to view the stream, so use network segmentation, physical placement discipline, and appropriate access controls for sensitive use.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="xcam-section xcam-faq">
+      <h2>FAQ</h2>
+      <details open>
+        <summary>Does XCAM require the internet?</summary>
+        <p>No. XCAM is built for local network use. Internet is not required for viewing the local stream once the device is configured on the LAN.</p>
+      </details>
+      <details>
+        <summary>Does XCAM replace XTOC Video ISR?</summary>
+        <p>No. XCAM is the camera node. XTOC Video ISR is the operator-facing board that stages and views feeds from XCAM and other sources.</p>
+      </details>
+      <details>
+        <summary>What stream formats are available?</summary>
+        <p>XCAM exposes RTSP, HTTP Motion JPEG, and HTTP JPEG snapshot URLs. The status page shows both <code>.local</code> names and IPv4 fallback paths when available.</p>
+      </details>
+      <details>
+        <summary>Can XCAM send alerts?</summary>
+        <p>Yes. When configured, motion alerts can send XTOC Sentinel packet text to the local MANET bridge URL.</p>
+      </details>
+      <details>
+        <summary>Which boards are supported?</summary>
+        <p>The firmware supports many ESP32-CAM class boards, including AI-Thinker ESP32-CAM, ESP-EYE, ESP32-S3 camera boards, M5Stack camera units, UnitCamS3, XIAO ESP32S3 Sense, and TTGO camera boards.</p>
+      </details>
+    </section>
+  </div>
+</div>

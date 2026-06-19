@@ -1,0 +1,138 @@
+PRODUCT TITLE
+XCAM Prebuilt LAN ISR Camera Node
+
+SHORT DESCRIPTION
+XCAM is a prebuilt local-network camera node for XTOC Video ISR. It gives preparedness groups, labs, field teams, and event operators a small RTSP/MJPEG/snapshot camera endpoint with browser setup, location-friendly naming, and optional XTOC Sentinel motion alerts.
+
+WHY TEAMS BUY XCAM
+Most low-cost cameras either depend on vendor apps or become messy one-off devices with unclear addresses, unclear names, and unclear operating roles. XCAM is built for the opposite workflow: place the camera, name it for the site, connect it to the local network, and hand clear URLs to the TOC.
+
+- Put eyes on gates, approaches, staging areas, equipment benches, vehicle lanes, storage rooms, temporary watch points, and training lanes.
+- Use local RTSP, MJPEG, and snapshot URLs instead of depending on a cloud camera account.
+- Give each camera a human-readable identity such as xcam-front-gate or xcam-yard-north so operators know what they are looking at.
+- Feed XTOC Video ISR with camera sources that are simple to test and simple to replace.
+- Enable optional camera-frame motion alerts that post XTOC T=11 SENTINEL packets to the local MANET bridge.
+
+XCAM is the small camera edge that makes the video board easier to populate, label, and operate.
+
+WHAT YOU ARE GETTING
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-hero.jpg" alt="XCAM ESP32 camera node hardware" width="1200" height="900" />
+
+- Premade ESP32-CAM class camera node with XCAM firmware installed.
+- Local browser setup page for WiFi, access password, board type, thing name, and camera tuning.
+- Stable local camera URLs:
+  - RTSP: rtsp://&lt;thing-name&gt;.local:554/mjpeg/1
+  - Browser MJPEG: http://&lt;thing-name&gt;.local/stream
+  - Snapshot: http://&lt;thing-name&gt;.local/snapshot
+- IPv4 fallback URLs on the status page for networks where .local name resolution is not available.
+- Site-friendly naming so each camera can match the physical location operators use on maps and plans.
+- Camera controls for frame size, frame duration, JPEG quality, PSRAM use, frame buffers, brightness, contrast, saturation, exposure, gain, white balance, mirror, flip, and related camera settings.
+- Optional XTOC Sentinel motion-alert settings:
+  - XTOC MANET bridge URL
+  - Sentinel label, node ID, and location
+  - sample interval, pixel delta, area threshold, consecutive-hit count, cooldown, and HTTP timeout
+
+XTOC VIDEO ISR FIT
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-video-isr-view.png" alt="XTOC Video ISR board with camera feeds" width="1888" height="909" />
+
+XCAM was made for the XTOC Video ISR workflow. XTOC is the operator-facing board. XCAM is the small local camera node underneath it.
+
+- Add the RTSP URL to XTOC when you want a TOC video tile.
+- Use the MJPEG stream for quick browser checks and simple local validation.
+- Use the snapshot URL when a still image is enough for confirmation, status, or documentation.
+- Name cameras by physical purpose: gate, yard, workshop, roof, approach road, staging table, drone bench, repeater shelf, or event lane.
+- Keep camera deployment local-first and under your own network instead of routing every feed through a vendor service.
+
+COMMON DEPLOYMENTS
+- Preparedness property watch points
+- Training lanes and MILSIM event-control points
+- Temporary gates, driveways, and perimeter checks
+- Equipment benches, battery stations, radio tables, and supply areas
+- Drone/ISR staging areas where the TOC wants a fixed reference view
+- Lab and maker-space monitoring without a cloud camera app
+- Local demos where an XTOC Video ISR board needs fast camera sources
+
+LOCAL-FIRST BY DESIGN
+XCAM is not trying to be a consumer cloud camera. It is a practical LAN node:
+
+- No cloud account required for local viewing.
+- No subscription relay required for local operation.
+- Simple URLs that can be copied into XTOC or tested in a browser.
+- mDNS naming for friendly local discovery.
+- IPv4 fallback for networks where mDNS is unreliable.
+
+MOTION ALERTS FOR XTOC SENTINEL
+When enabled, XCAM can compare sampled camera frames and post a structured XTOC Sentinel alert to the configured local MANET bridge URL.
+
+- The camera frame itself is the motion input.
+- Operators can tune sensitivity and cooldown for the site.
+- Alerts use XTOC T=11 SENTINEL packet text so the event lands in the same operational ecosystem as other X Suite reports.
+- This is useful for lightweight "something changed here" awareness, not as a certified alarm system.
+
+SETUP PATH
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-configuration.png" alt="XCAM browser configuration page" width="1365" height="768" />
+
+1. Power the XCAM device.
+2. Connect to the temporary xcam-&lt;suffix&gt; setup WiFi if it has not been provisioned yet.
+3. Open the setup page and enter the local WiFi settings.
+4. Set a meaningful thing name such as xcam-front-gate.
+5. Reboot onto the permanent network.
+6. Open the status page and verify the RTSP, MJPEG, and snapshot URLs.
+7. Add the desired URL to XTOC Video ISR or any compatible local viewer.
+
+OPERATIONAL NOTES
+- XCAM is intended for trusted LAN, field LAN, lab, MANET, and controlled local-network deployments.
+- Anyone who can reach the stream URL may be able to view the camera feed. Segment the network and place cameras accordingly.
+- WiFi quality, power stability, antenna placement, and board variant affect real-world reliability.
+- Motion alerts depend on camera view, lighting, sensitivity settings, and network reachability to the bridge.
+- XCAM does not replace a hardened NVR, certified security camera system, or life-safety alarm system.
+
+WHAT XCAM PAIRS WITH
+- XTOC for Video ISR, incident awareness, Sentinel ingest, and TOC-side operations.
+- XCOM for field-side packet workflows and operational context.
+- XNODE when operators need wearable awareness alongside the larger X Suite picture.
+- XCORE and XINTEL when the team wants broader local analysis and watch-floor support around the same operational picture.
+
+GOOD FIT FOR
+- Preparedness groups that want local video without a vendor camera cloud.
+- Makers and radio operators building a small TOC or lab bench.
+- MILSIM and training teams that need cheap observation nodes.
+- Teams already using XTOC and wanting simple, repeatable video inputs.
+- Anyone who wants a small camera endpoint that speaks practical local protocols.
+
+NOT A GOOD FIT FOR
+- Sites that require certified commercial security-camera compliance.
+- Public internet exposure without VPN, firewalling, or other protection.
+- Environments where the camera must work without local power and WiFi planning.
+- Users expecting a phone-app cloud camera ecosystem.
+
+[SECTION: FAQ]
+Q: Does XCAM require XTOC?
+A: No. XCAM exposes normal local RTSP, MJPEG, and snapshot URLs. XTOC Video ISR is the preferred X Suite viewer, but compatible local viewers can use the same streams.
+
+Q: Does XCAM require the internet?
+A: No. XCAM is designed for local-network operation. Internet is not required for local viewing after the camera is configured.
+
+Q: What makes XCAM different from a generic ESP32-CAM sketch?
+A: XCAM is packaged around operational use: unique default identity, location-friendly naming, local status page URLs, RTSP/MJPEG/snapshot surfaces, broad camera tuning, and optional XTOC Sentinel motion-alert posting.
+
+Q: Can several XCAM devices run on the same LAN?
+A: Yes. Each device starts with a unique default identity and should be renamed to a physical location or role so operators can tell feeds apart.
+
+Q: Can XCAM send motion alerts into XTOC?
+A: Yes, when motion alerts are configured with a usable XTOC MANET bridge URL. The device sends XTOC T=11 SENTINEL packet text.
+
+Q: Is this a cloud camera?
+A: No. XCAM is meant to be a local LAN camera node. It does not need a cloud camera service for local viewing.
+
+Q: Can I expose XCAM directly to the public internet?
+A: That is not recommended. Use trusted LANs, VPNs, firewall rules, and network segmentation appropriate to your deployment.
+
+Q: Does this include an XTOC license?
+A: Not by default unless the store bundle explicitly says so. XCAM is the camera node; XTOC is the separate command-center software.
+
+Q: What should I name each camera?
+A: Use the physical role or location operators will recognize, such as xcam-front-gate, xcam-yard-north, xcam-drone-bench, or xcam-radio-room.
+
+Q: Is motion detection a certified alarm system?
+A: No. It is lightweight operational awareness based on camera-frame change detection and should not be treated as a certified life-safety or intrusion alarm system.
