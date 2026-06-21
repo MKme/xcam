@@ -32,6 +32,17 @@ WHAT YOU ARE GETTING
   - Sentinel label, node ID, and location
   - sample interval, pixel delta, area threshold, consecutive-hit count, cooldown, and HTTP timeout
 
+TACTICAL-PAINTED HELMET MOUNT USE CASE
+These photos show XCAM in a muted tactical-painted enclosure and fitted to a helmet mount for FPV-style local streaming. The camera still uses the same XCAM local RTSP, MJPEG, and snapshot URLs, so the feed can be tested in a browser or added to XTOC Video ISR on the same trusted network.
+
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6775.jpg" alt="Tactical-painted XCAM enclosure held in hand" width="761" height="1014" />
+
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6776.jpg" alt="Tactical-painted XCAM camera fitted to a helmet mount" width="761" height="1014" />
+
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6777.jpg" alt="XCAM mounted on a helmet for FPV streaming" width="762" height="1016" />
+
+<img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6785.jpg" alt="Field kit layout with XCAM cameras and local-network gear" width="1355" height="1016" />
+
 XTOC VIDEO ISR FIT
 <img class="aligncenter size-full" src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/xcam-video-isr-view.png" alt="XTOC Video ISR board with camera feeds" width="1888" height="909" />
 

@@ -36,6 +36,10 @@
   .xcam-image{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block;background:#0f1719}
   .xcam-split{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
   .xcam-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+  .xcam-field-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}
+  .xcam-field-gallery figure{margin:0}
+  .xcam-field-gallery img{width:100%;height:320px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;background:#0f1719}
+  .xcam-field-gallery figcaption{margin:8px 0 0;font-size:14px;line-height:1.35;color:var(--muted)}
   .xcam-mini{padding:16px;border-left:4px solid #32a7a0;background:#f7faf8;border-radius:6px}
   .xcam-mini strong{display:block;margin-bottom:4px;color:#14262a}
   .xcam-callout{padding:20px 22px;border:1px solid #b9d7dc;background:#eef8fa;border-radius:8px}
@@ -43,7 +47,7 @@
   .xcam-faq summary{cursor:pointer;font-weight:800;color:#182d31}
   .xcam-faq p{margin:10px 0 0;color:#445b5f}
   .xcam-note{font-size:14px;color:#637579}
-  @media (max-width:900px){.xcam-hero{min-height:auto}.xcam-hero-content{padding:44px 24px}.xcam-hero h1{font-size:38px}.xcam-hero p{font-size:18px}.xcam-proof,.xcam-grid,.xcam-grid.two,.xcam-split,.xcam-strip{grid-template-columns:1fr}}
+  @media (max-width:900px){.xcam-hero{min-height:auto}.xcam-hero-content{padding:44px 24px}.xcam-hero h1{font-size:38px}.xcam-hero p{font-size:18px}.xcam-proof,.xcam-grid,.xcam-grid.two,.xcam-split,.xcam-strip,.xcam-field-gallery{grid-template-columns:1fr}.xcam-field-gallery img{height:auto}}
 </style>
 
 <div class="xcam-page">
@@ -83,6 +87,29 @@
           <span class="xcam-dot blue"></span>
           <div><h3>Ready for the XTOC video board</h3><p>XCAM feeds can be added to XTOC Video ISR using RTSP, browser-viewable MJPEG, or a still snapshot URL for quick visual verification.</p></div>
         </div>
+      </div>
+    </section>
+
+    <section class="xcam-section">
+      <h2>Tactical paint, helmet mount, FPV streaming.</h2>
+      <p class="xcam-lead">XCAM can be staged as a compact body-worn or helmet-mounted local video node. These photos show the muted tactical-painted enclosure, the helmet mount fit, the installed camera position, and a field kit layout built around local-network video and comms gear.</p>
+      <div class="xcam-field-gallery">
+        <figure>
+          <img src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6775.jpg" alt="Tactical-painted XCAM enclosure held in hand" width="761" height="1014" loading="lazy" decoding="async" />
+          <figcaption>Muted painted enclosure for low-profile field use.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6776.jpg" alt="Tactical-painted XCAM camera fitted to a helmet mount" width="761" height="1014" loading="lazy" decoding="async" />
+          <figcaption>FPV-style camera body fitted to the helmet mount.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6777.jpg" alt="XCAM mounted on a helmet for FPV streaming" width="762" height="1016" loading="lazy" decoding="async" />
+          <figcaption>Installed helmet position for local FPV streaming.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://raw.githubusercontent.com/MKme/xcam/main/site/images/IMG_6785.jpg" alt="Field kit layout with XCAM cameras and local-network gear" width="1355" height="1016" loading="lazy" decoding="async" />
+          <figcaption>Field kit layout with XCAM and supporting local-network gear.</figcaption>
+        </figure>
       </div>
     </section>
 

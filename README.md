@@ -19,6 +19,16 @@ For a fast XCAM bring-up, start with the standard ESP32-CAM board:
 - Buy the board: [ESP32-CAM board on Amazon](https://amzn.to/4sGDcpn)
 - Optional case: [ESP32-CAM case on Thingiverse](https://www.thingiverse.com/thing:6325976)
 
+## Field-painted helmet mount example
+
+These build photos show XCAM in a muted tactical-painted enclosure and staged for a helmet-mounted FPV streaming use case. The same local RTSP, MJPEG, and snapshot URLs can feed XTOC Video ISR or another trusted LAN viewer while the camera rides on a helmet mount.
+
+| Painted XCAM enclosure | Helmet mount fit check |
+|---|---|
+| ![Tactical-painted XCAM enclosure held in hand](site/images/IMG_6775.jpg) | ![Tactical-painted XCAM camera fitted to a helmet mount](site/images/IMG_6776.jpg) |
+| Helmet-mounted FPV view | Field kit layout |
+| ![XCAM mounted on a helmet for FPV streaming](site/images/IMG_6777.jpg) | ![Field kit layout with XCAM cameras and local-network gear](site/images/IMG_6785.jpg) |
+
 Out of the box, each flashed node boots with a unique default identity such as `xcam-a1b2c3`. That matters when several units share the same LAN:
 
 - each camera exposes a different setup SSID during provisioning
