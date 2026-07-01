@@ -10,6 +10,8 @@ XTOC is the operator-facing video ISR surface in the ecosystem. XCAM is the edge
 
 See the XTOC suite: [XTOC Tactical Operations Center Software Suite](https://store.mkme.org/product/xtoc-tactical-operations-center-software-suite/)
 
+Documentation source for the GitHub Wiki lives in [`wiki/`](wiki/Home.md). It covers the product ecosystem, firmware routes, hardware targets, LAN video workflow, XTOC Sentinel motion alerts, build/flash/test workflow, and field troubleshooting.
+
 ## Hardware
 
 ![AI-Thinker ESP32-CAM board](assets/boards/ai-thinker-esp32-cam.jpg)
@@ -176,6 +178,8 @@ Install [Visual Studio Code](https://code.visualstudio.com) and install the Plat
 When using the ESP32-CAM-MB board, press and hold the GP0 button on the ESP32-CAM-MB board.
 Then press short the reset button (on the inside) on the ESP32-CAM board and release the GP0 button.
 This will put the ESP32-CAM board in download mode.
+On some ESP32-CAM-MB adapter boards, this is the left button when the camera is facing up toward you.
+If the board is not detected by the flasher, hold that left GP0/BOOT button while plugging in USB, then run the erase or upload command.
 
 ### FTDI adapter
 
@@ -183,7 +187,7 @@ When using an FTDI adapter, make sure the adapter is set to 3.3 volt before conn
 
 ![ESP FTDI wiring](assets/ESP32CAM-to-FTDI.png)
 
-After programming remove the wire to tge GPIO0 pin to exit the download mode.
+After programming remove the wire to the GPIO0 pin to exit the download mode.
 
 ## Compiling and deploying the software
 

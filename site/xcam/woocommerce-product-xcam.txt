@@ -2,7 +2,7 @@ PRODUCT TITLE
 XCAM Prebuilt LAN ISR Camera Node
 
 SHORT DESCRIPTION
-XCAM is a prebuilt local-network camera node for XTOC Video ISR. It gives preparedness groups, labs, field teams, and event operators a small RTSP/MJPEG/snapshot camera endpoint with browser setup, location-friendly naming, and optional XTOC Sentinel motion alerts.
+XCAM is a prebuilt local-network camera node for XTOC Video ISR. It gives preparedness groups, labs, field teams, and event operators a small RTSP/MJPEG/snapshot camera endpoint with browser setup, status-page diagnostics, location-friendly naming, and optional XTOC Sentinel motion alerts.
 
 WHY TEAMS BUY XCAM
 Most low-cost cameras either depend on vendor apps or become messy one-off devices with unclear addresses, unclear names, and unclear operating roles. XCAM is built for the opposite workflow: place the camera, name it for the site, connect it to the local network, and hand clear URLs to the TOC.
@@ -20,6 +20,7 @@ WHAT YOU ARE GETTING
 
 - Premade ESP32-CAM class camera node with XCAM firmware installed.
 - Local browser setup page for WiFi, access password, board type, thing name, and camera tuning.
+- Local status page with board, heap, PSRAM, WiFi, camera, RTSP, stream, snapshot, and motion-alert diagnostics.
 - Stable local camera URLs:
   - RTSP: rtsp://&lt;thing-name&gt;.local:554/mjpeg/1
   - Browser MJPEG: http://&lt;thing-name&gt;.local/stream
@@ -31,6 +32,28 @@ WHAT YOU ARE GETTING
   - XTOC MANET bridge URL
   - Sentinel label, node ID, and location
   - sample interval, pixel delta, area threshold, consecutive-hit count, cooldown, and HTTP timeout
+- Full GitHub Wiki documentation covering setup, supported boards, firmware routes, XTOC Video ISR workflow, Sentinel bridge tuning, build/flash/test workflow, and troubleshooting:
+  - https://github.com/MKme/xcam/wiki
+
+CURRENT FIRMWARE HIGHLIGHTS
+- Unique default identity such as xcam-a1b2c3 so multiple cameras can be staged on the same LAN without naming collisions.
+- mDNS hostname based on the configured thing name, plus IPv4 fallback URLs on the status page.
+- RTSP server on port 554 when the camera initializes successfully.
+- HTTP status/config service on port 80.
+- Optional flash LED route on supported board targets.
+- Motion-alert packet helper covered by a host-side regression test.
+- Publish-ready wiki source maintained in the repo under wiki/.
+
+SUPPORTED TARGET FAMILIES
+XCAM builds many ESP32-CAM class targets from the same PlatformIO tree, including:
+
+- AI-Thinker ESP32-CAM
+- Espressif ESP-EYE, ESP32-S2 camera boards, ESP32-S3 camera boards, and ESP32-S3-EYE
+- Freenove WROVER camera boards
+- M5Stack ESP32CAM, Camera, Camera PSRAM, UnitCam, UnitCamS3, Wide, M5PoECAM-W, AtomS3R, and Timer CAM
+- Seeed Studio XIAO ESP32S3 Sense
+- TTGO T-CAMERA and TTGO T-JOURNAL
+- ESP32-S3 WROOM N16R8 camera builds
 
 TACTICAL-PAINTED HELMET MOUNT USE CASE
 These photos show XCAM in a muted tactical-painted enclosure and fitted to a helmet mount for FPV-style local streaming. The camera still uses the same XCAM local RTSP, MJPEG, and snapshot URLs, so the feed can be tested in a browser or added to XTOC Video ISR on the same trusted network.
@@ -71,6 +94,7 @@ XCAM is not trying to be a consumer cloud camera. It is a practical LAN node:
 - Simple URLs that can be copied into XTOC or tested in a browser.
 - mDNS naming for friendly local discovery.
 - IPv4 fallback for networks where mDNS is unreliable.
+- GitHub Wiki documentation for operators and builders who need the full setup, build, and troubleshooting workflow.
 
 MOTION ALERTS FOR XTOC SENTINEL
 When enabled, XCAM can compare sampled camera frames and post a structured XTOC Sentinel alert to the configured local MANET bridge URL.
@@ -90,6 +114,7 @@ SETUP PATH
 5. Reboot onto the permanent network.
 6. Open the status page and verify the RTSP, MJPEG, and snapshot URLs.
 7. Add the desired URL to XTOC Video ISR or any compatible local viewer.
+8. Record the IPv4 fallback URL when .local name resolution is unreliable.
 
 OPERATIONAL NOTES
 - XCAM is intended for trusted LAN, field LAN, lab, MANET, and controlled local-network deployments.
@@ -97,6 +122,14 @@ OPERATIONAL NOTES
 - WiFi quality, power stability, antenna placement, and board variant affect real-world reliability.
 - Motion alerts depend on camera view, lighting, sensitivity settings, and network reachability to the bridge.
 - XCAM does not replace a hardened NVR, certified security camera system, or life-safety alarm system.
+- Do not expose XCAM directly to the public internet without VPN, firewalling, and network segmentation appropriate to the site.
+
+DOCUMENTATION AND SOURCE
+- GitHub source repo: https://github.com/MKme/xcam
+- GitHub Wiki: https://github.com/MKme/xcam/wiki
+- Wiki source in the repo: wiki/
+- Firmware routes documented in the wiki: status page, config page, RTSP, MJPEG stream, snapshot, restart, optional flash LED, and Sentinel motion bridge.
+- Build and test documentation includes PlatformIO target examples and the host motion-alert regression test.
 
 WHAT XCAM PAIRS WITH
 - XTOC for Video ISR, incident awareness, Sentinel ingest, and TOC-side operations.
@@ -130,6 +163,9 @@ A: XCAM is packaged around operational use: unique default identity, location-fr
 Q: Can several XCAM devices run on the same LAN?
 A: Yes. Each device starts with a unique default identity and should be renamed to a physical location or role so operators can tell feeds apart.
 
+Q: What boards does XCAM support?
+A: XCAM builds many ESP32-CAM class PlatformIO targets, including AI-Thinker, Espressif ESP-EYE and ESP32-S2/S3 camera boards, Freenove WROVER, M5Stack camera devices, XIAO ESP32S3 Sense, TTGO camera boards, and ESP32-S3 WROOM N16R8 camera builds. Check the GitHub Wiki hardware page for the current target list.
+
 Q: Can XCAM send motion alerts into XTOC?
 A: Yes, when motion alerts are configured with a usable XTOC MANET bridge URL. The device sends XTOC T=11 SENTINEL packet text.
 
@@ -147,3 +183,6 @@ A: Use the physical role or location operators will recognize, such as xcam-fron
 
 Q: Is motion detection a certified alarm system?
 A: No. It is lightweight operational awareness based on camera-frame change detection and should not be treated as a certified life-safety or intrusion alarm system.
+
+Q: Where are the full setup docs?
+A: The XCAM GitHub Wiki covers product fit, firmware routes, hardware targets, LAN video setup, Sentinel motion-alert bridge behavior, build/flash/test workflow, and troubleshooting: https://github.com/MKme/xcam/wiki

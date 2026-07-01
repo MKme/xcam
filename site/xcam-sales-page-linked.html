@@ -56,9 +56,10 @@
     <div class="xcam-hero-content">
       <div class="xcam-kicker">X Suite LAN video node</div>
       <h1>XCAM turns small ESP32 cameras into field-ready ISR nodes.</h1>
-      <p>XCAM is the local-first camera edge for XTOC Video ISR: stable RTSP, MJPEG, and snapshot URLs, browser setup, site-friendly naming, and optional camera-frame motion alerts that can report into the XTOC Sentinel workflow.</p>
+      <p>XCAM is the local-first camera edge for XTOC Video ISR: stable RTSP, MJPEG, and snapshot URLs, browser setup, status-page diagnostics, site-friendly naming, and optional camera-frame motion alerts that can report into the XTOC Sentinel workflow.</p>
       <div class="xcam-actions">
         <a class="xcam-button dark" href="https://github.com/MKme/xcam" target="_blank" rel="noreferrer">View XCAM on GitHub</a>
+        <a class="xcam-button" href="https://github.com/MKme/xcam/wiki" target="_blank" rel="noreferrer">Read the XCAM wiki</a>
         <a class="xcam-button warn" href="#capabilities">Device capabilities</a>
         <a class="xcam-button" href="#workflow">See the workflow</a>
       </div>
@@ -140,11 +141,12 @@
           </ul>
         </div>
         <div class="xcam-card">
-          <h3>Browser configuration</h3>
+          <h3>Browser configuration and status</h3>
           <ul>
             <li>Set WiFi, access password, thing name, board type, and connection timeout.</li>
             <li>Tune frame size, frame duration, JPEG quality, PSRAM use, and frame buffers.</li>
             <li>Adjust camera controls such as brightness, contrast, saturation, gain, exposure, white balance, mirror, flip, and lens correction.</li>
+            <li>Review board, heap, PSRAM, WiFi, camera, RTSP, and motion-alert diagnostics from the local status page.</li>
           </ul>
         </div>
         <div class="xcam-card">
@@ -158,7 +160,7 @@
         <div class="xcam-card">
           <h3>Small nodes, broad placement</h3>
           <ul>
-            <li>Works with ESP32-CAM class boards including AI-Thinker, ESP-EYE, ESP32-S3 camera boards, M5Stack camera variants, UnitCam, UnitCamS3, XIAO ESP32S3 Sense, TTGO camera boards, and similar targets.</li>
+            <li>Works with ESP32-CAM class boards including AI-Thinker, ESP-EYE, ESP32-S3 camera boards, M5Stack camera variants, UnitCam, UnitCamS3, M5PoECAM-W, XIAO ESP32S3 Sense, TTGO camera boards, and similar targets.</li>
             <li>Fits low-cost fixed observation points where a full laptop, phone, or NVR is the wrong tool.</li>
           </ul>
         </div>
@@ -197,6 +199,28 @@
     </section>
 
     <section class="xcam-section">
+      <h2>Documentation and source</h2>
+      <p class="xcam-lead">The XCAM repo now includes a full GitHub Wiki source set covering the product ecosystem, firmware routes, supported hardware targets, LAN video workflow, Sentinel bridge behavior, build/flash/test workflow, and field troubleshooting.</p>
+      <div class="xcam-grid">
+        <div class="xcam-card">
+          <h3>GitHub source</h3>
+          <p>Firmware, PlatformIO environments, board definitions, status-page HTML, motion-alert helpers, and host tests are maintained in the XCAM repository.</p>
+        </div>
+        <div class="xcam-card">
+          <h3>Wiki pages</h3>
+          <p>The wiki documents setup, camera URLs, supported targets, XTOC Video ISR use, motion-alert tuning, and common field failure checks in a publish-ready GitHub Wiki format.</p>
+        </div>
+        <div class="xcam-card">
+          <h3>Operator handoff</h3>
+          <p>Each deployed camera should leave staging with a physical-location name, verified snapshot or stream URL, and IPv4 fallback URL recorded for the TOC.</p>
+        </div>
+      </div>
+      <div class="xcam-actions">
+        <a class="xcam-button dark" href="https://github.com/MKme/xcam/wiki" target="_blank" rel="noreferrer">Open the wiki</a>
+      </div>
+    </section>
+
+    <section class="xcam-section">
       <div class="xcam-callout">
         <h2>Operational note</h2>
         <p>XCAM is intended for trusted local networks, field LANs, MANET segments, lab benches, and temporary operational setups. Anyone who can reach the camera URL on the network may be able to view the stream, so use network segmentation, physical placement discipline, and appropriate access controls for sensitive use.</p>
@@ -223,7 +247,11 @@
       </details>
       <details>
         <summary>Which boards are supported?</summary>
-        <p>The firmware supports many ESP32-CAM class boards, including AI-Thinker ESP32-CAM, ESP-EYE, ESP32-S3 camera boards, M5Stack camera units, UnitCamS3, XIAO ESP32S3 Sense, and TTGO camera boards.</p>
+        <p>The firmware supports many ESP32-CAM class boards, including AI-Thinker ESP32-CAM, ESP-EYE, ESP32-S2/S3 camera boards, Freenove WROVER, M5Stack camera units, UnitCamS3, M5PoECAM-W, Timer CAM, XIAO ESP32S3 Sense, and TTGO camera boards.</p>
+      </details>
+      <details>
+        <summary>Where is the setup documentation?</summary>
+        <p>The XCAM GitHub Wiki covers the product ecosystem, firmware routes, hardware targets, LAN video setup, Sentinel motion-alert bridge, build/flash/test workflow, and troubleshooting.</p>
       </details>
     </section>
   </div>
